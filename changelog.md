@@ -1,7 +1,12 @@
-# v1.0.2
+# v1.0.3
 
 * Restore music volume whenever user closes game while Tier Up animation is in progress
 * Bump minimum Geode Node IDs requirement
+
+# v1.0.2
+
+* Fixed(?) aspect ratio issue in the Tier Up screen.
+* Fixed(?) the Tier Bar popup not showing up sometimes.
 
 # v1.0.1
 
