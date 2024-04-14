@@ -4,15 +4,15 @@
 		"win": "2.204",
 		"android": "2.205"
 	},
-	"version": "v1.0.1",
+	"version": "v1.0.2",
 	"id": "itzkiba.better_progression",
 	"name": "Better Progression",
 	"developer": "ItzKiba",
-	"description": "TODO",
+	"description": "Adds a leveling/XP system, along with badges to track your progress!",
 	"dependencies": [
 		{
 			"id": "geode.node-ids",
-			"version": ">=1.8.1",
+			"version": ">=1.9.0",
 			"importance": "required"
 		}
 	],
