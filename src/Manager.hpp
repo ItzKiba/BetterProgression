@@ -8,7 +8,7 @@ protected:
 	static Manager* instance;
 public:
 
-	float orignalVolume = 0.0f;
+	float orignalVolume = FMODAudioEngine::sharedEngine()->m_musicVolume;
 	
 	static Manager* getSharedInstance(){
 
