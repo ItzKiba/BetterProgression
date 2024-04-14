@@ -2,11 +2,6 @@
 
 void TierBarPopup::createPopup(CCScene* scene, int originalEXP, int newEXP, float delay) {
 
-    if (TierBarPopup::m_popupExists) {
-        return;
-    }
-    TierBarPopup::m_popupExists = true;
-
     m_expMaxDisplayVal = 0;
     m_timePerEXPTick = 0;
     m_expDecayValue = 1;
@@ -19,7 +14,7 @@ void TierBarPopup::createPopup(CCScene* scene, int originalEXP, int newEXP, floa
     background->setContentSize({winSize.width * 0.9f, 65.f});
     background->setPosition({winSize.width / 2, 40.f - 80.f});
     background->setZOrder(1);
-    background->setOpacity((delay > 1.0f ? 0 : 150));
+    background->setOpacity((delay > 1.0f ? 75 : 150));
     scene->addChild(background);
 
     background->setID("tier-popup"_spr);
@@ -175,8 +170,8 @@ void TierBarPopup::createPopup(CCScene* scene, int originalEXP, int newEXP, floa
     }
 
     background->addChild(badgeSprite);
-    badgeSprite->setPosition({40, background->getContentHeight() / 2});
-    barSpriteBack->setPosition({250, background->getContentHeight() / 2});
+    badgeSprite->setPosition({background->getContentWidth() * 0.1f, background->getContentHeight() / 2});
+    barSpriteBack->setPosition({background->getContentWidth() * 0.55f, background->getContentHeight() / 2});
 
     ccColor3B barColor = {0, 255, 0};
     if (!(Mod::get()->getSettingValue<bool>("bar-color"))) {
@@ -279,7 +274,6 @@ void TierBarPopup::incrementEXPByOne() {
 
 void TierBarPopup::removePopup() {
     TierBarPopup::m_popup->removeFromParentAndCleanup(true);
-    TierBarPopup::m_popupExists = false;
 }
 
 void TierBarPopup::createPopupSubroutine(CCScene* scene, int originalEXP, int newEXP, float delay) {
