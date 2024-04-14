@@ -79,10 +79,10 @@ class $modify(BP_ProfilePage, ProfilePage) {
         statsMenu->setPositionX(this->m_fields->m_newStatsPositionX);
 
 
-        auto leftMenu = this->m_fields->m_mainLayer->getChildByID("left-menu");
-        if (leftMenu != nullptr) {
-            leftMenu->setPositionY(this->m_fields->m_newIconBGPositionY - 27.f);
-        }
+        // auto leftMenu = this->m_fields->m_mainLayer->getChildByID("left-menu");
+        // if (leftMenu != nullptr) {
+        //     leftMenu->setPositionY(this->m_fields->m_newIconBGPositionY - 27.f);
+        // }
 
         this->m_fields->m_determinePositions = true;
 
