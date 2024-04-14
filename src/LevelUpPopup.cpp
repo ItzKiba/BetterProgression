@@ -18,8 +18,20 @@ bool LevelUpPopup::init(int level, int newLevel) {
 	}
 
 	Loader::get()->queueInMainThread([this] {
-		auto parentLayer = dynamic_cast<CCLayer*>(this->getParent());
-		m_parentLayer = parentLayer;
+		auto parentLayer = typeinfo_cast<CCLayer*>(this->getParent());
+        
+        // ORIGINAL CODE:
+        // m_parentLayer = parentLayer;
+
+        // NEW CODE
+        if (parentLayer->getID() == "prism-icon") {
+            auto parentLayer2 = typeinfo_cast<CCLayer*>(parentLayer->getParent());
+            m_parentLayer = parentLayer2;
+        } else {
+    		m_parentLayer = parentLayer;
+        }
+        ///////////
+
 		m_parentLayer->setKeypadEnabled(false);
 		this->setKeypadEnabled(false);
 
@@ -29,6 +41,7 @@ bool LevelUpPopup::init(int level, int newLevel) {
 
 		auto ek_seq = CCSequence::create(enablekeypad_array);
 		this->runAction(ek_seq);
+        
 	});
 
 	ccBlendFunc blending = {GL_ONE, GL_ONE};
