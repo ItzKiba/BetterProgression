@@ -15,6 +15,18 @@
 			"version": ">=1.9.0",
 			"importance": "required"
 		}
+    ],
+	"incompatibilities": [
+		{
+			"id": "zilko.better_screenshots",
+			"version": "*",
+			"importance": "breaking"
+		},
+		{
+			"id": "bitz.customprofiles",
+			"version": "<=1.0.6",
+			"importance": "breaking"
+		}
 	],
 	"resources": {
 		"spritesheets": {
@@ -39,6 +51,12 @@
 		"disable-tier-bar": {
 			"name": "Disable Tier Bar",
 			"description": "Removes the tier bar that shows whenever you complete a level.\n\n<cp>The tier bar will still appear when you level up your Tier.</c>",
+			"type": "bool",
+			"default": false
+		},
+		"disable-open-check": {
+			"name": "Disable EXP Update on Startup",
+			"description": "Removes the check for a change in EXP on startup.\n\n<cg>Useful on Android where saving mod data may not work as intended.</c>",
 			"type": "bool",
 			"default": false
 		}

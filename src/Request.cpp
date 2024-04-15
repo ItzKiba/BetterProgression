@@ -10,20 +10,24 @@ void Request::performCPRequest() {
 		return;
 	}
 
-	int accountID = GJAccountManager::get()->m_accountID;
-	int totalEXP = 0;
-	web::AsyncWebRequest()
-		.postRequest()
-		.bodyRaw(fmt::format("targetAccountID={}&secret={}", accountID, "Wmfd2893gb7"))
-		.fetch("http://www.boomlings.com/database/getGJUserInfo20.php")
-		.text()
-		.then([totalEXP](const std::string& response) {
-			
-			Request::m_openGameChecked = true;
-			Request::m_cp = std::stoi(parseRequest(response, "8"));
-				
-			int originalEXP = Mod::get()->getSavedValue<int>("total-exp");
-			generateNewTotalEXP();
+    int accountID = GJAccountManager::get()->m_accountID;
+    int totalEXP = 0;
+    web::AsyncWebRequest()
+        .postRequest()
+        .bodyRaw(fmt::format("targetAccountID={}&secret={}", accountID, "Wmfd2893gb7"))
+        .fetch("http://www.boomlings.com/database/getGJUserInfo20.php")
+        .text()
+        .then([totalEXP](const std::string& response) {
+            
+            Request::m_openGameChecked = true;
+            Request::m_cp = std::stoi(parseRequest(response, "8"));
+
+            int originalEXP = Mod::get()->getSavedValue<int>("total-exp");
+            generateNewTotalEXP();
+
+            if (Mod::get()->getSettingValue<bool>("disable-open-check")) {
+                return;
+            }
 
 			int newEXP = Request::currentTotalEXP();
 			int currentLevel = LevelHelper::getLevelFromEXP(originalEXP);
@@ -32,34 +36,33 @@ void Request::performCPRequest() {
 
 			auto scene = CCDirector::sharedDirector()->getRunningScene();
 
-			Loader::get()->queueInMainThread([scene, originalEXP, newEXP, currentLevel, nextLevelEXP, nextLevel] {
-				CCLayer* parentLayer = nullptr;
-				CCObject* obj;
-				CCARRAY_FOREACH(scene->getChildren(), obj) {
-					auto ccl = typeinfo_cast<CCLayer*>(obj);
-					if (ccl != nullptr) {
-						parentLayer = ccl;
-						break;
-					}
-				}
+                Loader::get()->queueInMainThread([scene, originalEXP, newEXP, currentLevel, nextLevelEXP, nextLevel] {
 
-				if (nextLevel > currentLevel) {
-					TierBarPopup::createPopupSubroutine(scene, nextLevelEXP, newEXP, 4.5f);
-					if (parentLayer != nullptr) {
-						auto popup = LevelUpPopup::create(currentLevel, nextLevel);
-						popup->m_scene = parentLayer;
-						popup->show();
-					}   
-				} else {
-					TierBarPopup::createPopupSubroutine(scene, originalEXP, newEXP, 0);
-				}
+                    CCLayer* parentLayer = nullptr;
+                    CCObject* obj;
+                    CCARRAY_FOREACH(scene->getChildren(), obj) {
+                        auto ccl = typeinfo_cast<CCLayer*>(obj);
+                        if (ccl != nullptr) {
+                            parentLayer = ccl;
+                            break;
+                        }
+                    }
 
-				auto menuLayer = scene->getChildByID("MenuLayer");
-				if (menuLayer != nullptr) {
-					
-				}
-			});
-		});
+                    if (nextLevel > currentLevel) {
+                        TierBarPopup::createPopupSubroutine(scene, nextLevelEXP, newEXP, 4.5f);
+                        if (parentLayer != nullptr) {
+                            auto popup = LevelUpPopup::create(currentLevel, nextLevel);
+                            popup->m_scene = parentLayer;
+                            popup->show();
+                        }   
+                    } else {
+                        TierBarPopup::createPopupSubroutine(scene, originalEXP, newEXP, 0);
+                    }
+                
+                
+            });
+            
+        });
 }
 
 int Request::generateNewTotalEXP() {
