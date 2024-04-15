@@ -1,4 +1,4 @@
-# v1.0.3
+# v1.0.4
 
 * Restore music volume whenever user closes game while Tier Up animation is in progress
 * Bump minimum Geode Node IDs requirement
