@@ -3,6 +3,10 @@
 * Restore music volume whenever user closes game while Tier Up animation is in progress
 * Bump minimum Geode Node IDs requirement
 
+# v1.0.4
+* Fixed a bug that caused the Tier Up animation to play every time you open the game on Android.
+* Fixed a crash that was caused by blocking a player.
+
 # v1.0.3
 * Made Better Screnshots incompatibile to protect against crashes.
 * Made Custom Profiles v1.0.6 and below incompatibile to protect against crashes.

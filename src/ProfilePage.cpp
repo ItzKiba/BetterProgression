@@ -39,6 +39,7 @@ class $modify(BP_ProfilePage, ProfilePage) {
 
 	void loadPageFromUserInfo(GJUserScore* p0) {
 		ProfilePage::loadPageFromUserInfo(p0);
+
 		searchForLayer();
 
 		auto gm = GameManager::get();
@@ -50,7 +51,10 @@ class $modify(BP_ProfilePage, ProfilePage) {
 		auto playerMenu = this->m_fields->m_mainLayer->getChildByID("player-menu");
 		auto iconBackground = this->m_fields->m_mainLayer->getChildByID("icon-background");
 		auto statsMenu = this->m_fields->m_mainLayer->getChildByID("stats-menu");
-		auto commentList = this->m_fields->m_mainLayer->getChildByID("GJCommentListLayer");
+
+		if (playerMenu == nullptr || iconBackground == nullptr || statsMenu == nullptr) {
+			return;
+		}
 		
 		if (Loader::get()->isModLoaded("bitz.customprofiles")) {
 			iconBackground = this->m_fields->m_mainLayer->getChildByID("bitz.customprofiles/ccscale-icons");
