@@ -13,6 +13,8 @@ using namespace geode::prelude;
 #include "Request.hpp"
 #include "TierBarPopup.hpp"
 
+bool quitFromPlayLayer = false;
+
 class $modify(BP_PlayLayer, PlayLayer) {
 
     bool init(GJGameLevel* level, bool useReplay, bool dontCreateObjects) {
@@ -26,6 +28,11 @@ class $modify(BP_PlayLayer, PlayLayer) {
 
         return true;
     }
+
+    void onQuit() {
+        PlayLayer::onQuit();
+        quitFromPlayLayer = true;
+    }
 };
 
 class $modify(BP_CCDirector, CCDirector) {
@@ -35,6 +42,13 @@ class $modify(BP_CCDirector, CCDirector) {
         CCDirector::willSwitchToScene(scene);
 
         Request::generateNewTotalEXP();
+
+        if (!quitFromPlayLayer) {
+            return;
+        }
+
+        quitFromPlayLayer = false;
+
         int newEXP = Request::currentTotalEXP();
         int currentLevel = LevelHelper::getLevelFromEXP(originalEXP);
         int nextLevel = LevelHelper::getLevelFromEXP(newEXP);
