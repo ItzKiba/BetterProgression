@@ -149,7 +149,7 @@ bool LevelUpPopup::init(int level, int newLevel) {
 	auto manager = Manager::getSharedInstance();
 	m_originalVolume = engine->m_musicVolume;
 	manager->orignalVolume = engine->m_musicVolume;
-	float newVolume = m_originalVolume / 4;
+	float newVolume = m_originalVolume / 4.f;
 
 	manager->volChangeNotFromTierUp = false;
 	engine->m_globalChannel->setVolume(newVolume); // [sfx] setVolume hook for ChannelControl.cpp to work
