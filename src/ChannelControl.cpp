@@ -5,8 +5,6 @@
 
 FMOD_RESULT setVolume(FMOD::ChannelControl* channel, float volume) {
     auto manager = Manager::getSharedInstance();
-    log::info("volume: {}", volume);
-    log::info("manager->volChangeNotFromTierUp: {}", manager->volChangeNotFromTierUp);
 	auto result = channel->setVolume(volume);
 	if (manager->volChangeNotFromTierUp) {
 	    manager->orignalVolume = volume;
