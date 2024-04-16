@@ -20,9 +20,6 @@ add_library(${PROJECT_NAME} SHARED
     src/LevelUpPopup.cpp
     src/ParticleManager.hpp
     src/MenuLayer.cpp
-    src/Manager.hpp
-    src/Manager.cpp
-    src/GameManager.cpp
     # Add your cpp files here
 )
 

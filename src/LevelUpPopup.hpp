@@ -5,7 +5,6 @@
 #include "SpriteHelper.hpp"
 #include "ParticleManager.hpp"
 #include "TierBarPopup.hpp"
-#include "Manager.hpp"
 
 using namespace geode::prelude;
 
