@@ -6,8 +6,9 @@
 FMOD_RESULT setVolume(FMOD::ChannelControl* channel, float volume) {
     auto manager = Manager::getSharedInstance();
 	auto result = channel->setVolume(volume);
-	if (manager->volChangeNotFromTierUp) {
+	if (manager->volChangeNotFromTierUp && channel == FMODAudioEngine::sharedEngine()->m_backgroundMusicChannel) {
 	    manager->orignalVolume = volume;
+	    log::info("volume: {}", volume);
 	}
 	return result;
 }
