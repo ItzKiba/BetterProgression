@@ -9,6 +9,7 @@ protected:
 public:
 
 	float orignalVolume = FMODAudioEngine::sharedEngine()->m_musicVolume;
+	bool volChangeNotFromTierUp = true;
 	
 	static Manager* getSharedInstance(){
 

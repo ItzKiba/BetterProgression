@@ -9,6 +9,7 @@ project(BetterProgression VERSION 1.0.0)
 
 add_library(${PROJECT_NAME} SHARED
 	src/main.cpp
+	src/ChannelControl.cpp
 	src/ProfilePage.cpp
 	src/LevelHelper.hpp
 	src/SpriteHelper.hpp

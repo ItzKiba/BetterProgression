@@ -1,6 +1,6 @@
-# v1.0.6
+# v1.0.7
 
-* Restore music volume whenever user closes game while Tier Up animation is in progress
+* Additional checks for changes in ingame volume.
 
 # v1.0.4
 * Fixed a bug that caused the Tier Up animation to play every time you open the game on Android.
