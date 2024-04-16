@@ -68,6 +68,11 @@ void Request::performCPRequest() {
 int Request::generateNewTotalEXP() {
     
     auto stats = GameStatsManager::sharedState()->m_playerStats;
+
+    if (stats == nullptr) {
+        return 0;
+    }
+
     Request::m_stars = std::stoi((stats->valueForKey("6"))->m_sString);
     Request::m_moons = std::stoi((stats->valueForKey("28"))->m_sString);
     Request::m_diamonds = std::stoi((stats->valueForKey("13"))->m_sString);

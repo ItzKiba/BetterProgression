@@ -146,7 +146,8 @@ bool LevelUpPopup::init(int level, int newLevel) {
 
     auto engine = FMODAudioEngine::sharedEngine();
     m_originalVolume = engine->m_musicVolume;
-    float newVolume = m_originalVolume / 4;
+    Manager::getSharedInstance()->originalVolume = engine->m_musicVolume;
+    float newVolume = max(m_originalVolume / 4, 0.01f);
 
     engine->m_musicVolume = newVolume;
     engine->m_backgroundMusicChannel->setVolume(newVolume);
@@ -306,8 +307,9 @@ void LevelUpPopup::onClose(CCObject* sender) {
     setKeypadEnabled(false);
     m_parentLayer->setKeypadEnabled(true);
     auto engine = FMODAudioEngine::sharedEngine();
-    engine->m_musicVolume = m_originalVolume;
-    engine->m_backgroundMusicChannel->setVolume(m_originalVolume);
+    float resetVolume = Manager::getSharedInstance()->originalVolume;
+    engine->m_musicVolume = resetVolume;
+    engine->m_backgroundMusicChannel->setVolume(resetVolume);
     removeFromParentAndCleanup(true);
 }
 
