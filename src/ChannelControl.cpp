@@ -7,7 +7,7 @@ FMOD_RESULT setVolume(FMOD::ChannelControl* channel, float volume) {
     auto manager = Manager::getSharedInstance();
 	auto result = channel->setVolume(volume);
 	if (manager->volChangeNotFromTierUp && channel == FMODAudioEngine::sharedEngine()->m_backgroundMusicChannel) {
-	    manager->orignalVolume = volume; // m_backgroundMusicChannel is for music channel, we dont need to track sfx channel
+	    manager->orignalVolume = volume; // m_backgroundMusicChannel is for music slider channel
 	}
 	return result;
 }
