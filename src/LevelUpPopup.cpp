@@ -3,6 +3,10 @@
 
 LevelUpPopup* LevelUpPopup::create(int level, int newLevel) {
     auto ret = new LevelUpPopup();
+    if (Manager::getSharedInstance()->isWherwin) {
+        auto alert = FLAlertLayer::create(":)", "cant you just play the game and enjoy that? if you guys wanna watch meaningless numbers go up you can play cookie clicker or something. go play runescape. those games are all about shit like this", "OK");
+        alert->show();
+    }
     if (ret && ret->init(level, newLevel)) {
         ret->autorelease();
     } else {
@@ -15,12 +19,6 @@ LevelUpPopup* LevelUpPopup::create(int level, int newLevel) {
 bool LevelUpPopup::init(int level, int newLevel) {
     if (!FLAlertLayer::init(0xC8)) {
         return false;
-    }
-    
-    if (Manager::getSharedInstance()->isWherwin) {
-        auto alert = FLAlertLayer::create(":)", "cant you just play the game and enjoy that? if you guys wanna watch meaningless numbers go up you can play cookie clicker or something. go play runescape. those games are all about shit like this", "OK");
-        alert->show();
-        return true;
     }
 
     Loader::get()->queueInMainThread([this] {

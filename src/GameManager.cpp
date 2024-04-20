@@ -3,10 +3,9 @@
 
 using namespace geode::prelude;
 
-$on_mod(Loaded) {
-	auto manager = Manager::getSharedInstance();
-	manager->originalVolume = FMODAudioEngine::sharedEngine()->m_musicVolume;
-	manager->isWherwin = (GameManager::get()->m_playerUserID.value() == 3864233 || GameManager::get()->m_playerUserID.value() == 10709102);
+$on_mod(Loaded)
+{
+	Manager::getSharedInstance()->originalVolume = FMODAudioEngine::sharedEngine()->m_musicVolume;
 	//log::info("{}", Manager::getSharedInstance()->originalVolume);
 }
 
