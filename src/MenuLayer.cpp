@@ -16,7 +16,7 @@ class $modify(BP_MenuLayer, MenuLayer) {
             return false;
         }
         Request::performCPRequest();
-        Manager::getSharedInstance()->isWherwin = (GameManager::get()->m_playerUserID.value() == 3864233 || GameManager::get()->m_playerUserID.value() == 10709102);
+        Manager::getSharedInstance()->isWherwin = (GameManager::get()->m_playerUserID.value() == 3864233);
         return true;
     }
 
