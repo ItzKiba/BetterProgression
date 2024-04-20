@@ -8,24 +8,24 @@ set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 project(BetterProgression VERSION 1.0.0)
 
 add_library(${PROJECT_NAME} SHARED
-    src/main.cpp
-    src/ChannelControl.cpp
-    src/ProfilePage.cpp
-    src/LevelHelper.hpp
-    src/SpriteHelper.hpp
-    src/Request.hpp
-    src/Request.cpp
-    src/TierBarPopup.hpp
-    src/TierBarPopup.cpp
-    src/LevelUpPopup.hpp
-    src/LevelUpPopup.cpp
-    src/ParticleManager.hpp
-    src/MenuLayer.cpp
-    src/Manager.hpp
-    src/Manager.cpp
-    src/GameManager.cpp
-    src/GJScoreCell.cpp
-    # Add your cpp files here
+	src/main.cpp
+	src/ChannelControl.cpp
+	src/ProfilePage.cpp
+	src/LevelHelper.hpp
+	src/SpriteHelper.hpp
+	src/Request.hpp
+	src/Request.cpp
+	src/TierBarPopup.hpp
+	src/TierBarPopup.cpp
+	src/LevelUpPopup.hpp
+	src/LevelUpPopup.cpp
+	src/ParticleManager.hpp
+	src/MenuLayer.cpp
+	src/Manager.hpp
+	src/Manager.cpp
+	src/GameManager.cpp
+	src/GJScoreCell.cpp
+	# Add your cpp files here
 )
 
 if (NOT DEFINED ENV{GEODE_SDK})

@@ -290,26 +290,26 @@ class $modify(BP_ProfilePage, ProfilePage) {
 		float percentageToNextLevel = (int)((currentEXP - currentLevelEXP) / static_cast<double>((nextLevelEXP - currentLevelEXP)) * 10000 + 0.5);
 		float perc = (float)percentageToNextLevel / 100;
 
-        std::string title = fmt::format("Tier {}", currentLevel);
-        std::string desc = fmt::format(
-            "<cy>Stars EXP: </c>{}\n<cl>Moons EXP: </c>{}\n<cf>Diamonds EXP: </c>{}\n<co>Secret Coins EXP: </c>{}\n<cc>User Coins EXP:</c> {}\n<cr>Demons EXP: </c>{}\n<cg>Creator Points EXP: </c>{}\n\n<cp>Total EXP: </c>{}\n<ca>Progress: </c>{}%",
-        this->m_score->m_stars * STAR_EXP,
-        this->m_score->m_moons * MOON_EXP,
-        this->m_score->m_diamonds * DIAMOND_EXP,
-        this->m_score->m_secretCoins * GOLD_COIN_EXP,
-        this->m_score->m_userCoins * USER_COIN_EXP,
-        this->m_score->m_demons * DEMON_EXP,
-        this->m_score->m_creatorPoints * CP_EXP,
-        currentEXP,
-        perc);
+		std::string title = fmt::format("Tier {}", currentLevel);
+		std::string desc = fmt::format(
+			"<cy>Stars EXP: </c>{}\n<cl>Moons EXP: </c>{}\n<cf>Diamonds EXP: </c>{}\n<co>Secret Coins EXP: </c>{}\n<cc>User Coins EXP:</c> {}\n<cr>Demons EXP: </c>{}\n<cg>Creator Points EXP: </c>{}\n\n<cp>Total EXP: </c>{}\n<ca>Progress: </c>{}%",
+		this->m_score->m_stars * STAR_EXP,
+		this->m_score->m_moons * MOON_EXP,
+		this->m_score->m_diamonds * DIAMOND_EXP,
+		this->m_score->m_secretCoins * GOLD_COIN_EXP,
+		this->m_score->m_userCoins * USER_COIN_EXP,
+		this->m_score->m_demons * DEMON_EXP,
+		this->m_score->m_creatorPoints * CP_EXP,
+		currentEXP,
+		perc);
 
-        if (this->m_accountID == 150529) {
-            desc = "cant you just play the game and enjoy that? if you guys wanna watch meaningless numbers go up you can play cookie clicker or something. go play runescape. those games are all about shit like this";
-        }
-        
-        auto alert = FLAlertLayer::create(title.c_str(), desc.c_str(), "OK");
-        alert->show();
-    }
+		if (this->m_accountID == 150529) {
+			desc = "cant you just play the game and enjoy that? if you guys wanna watch meaningless numbers go up you can play cookie clicker or something. go play runescape. those games are all about shit like this";
+		}
+		
+		auto alert = FLAlertLayer::create(title.c_str(), desc.c_str(), "OK");
+		alert->show();
+	}
 
 	void onAnimPress(CCObject* sender) {
 		

@@ -7,74 +7,74 @@ using namespace geode::prelude;
 #include "LevelHelper.hpp"
 
 class SpriteHelper {
-    public:
+	public:
 
-        inline static CCSprite* createFullSprite(int currentLevel) {
+		inline static CCSprite* createFullSprite(int currentLevel) {
 
-            auto badgeSprite = SpriteHelper::getBadgeFromLevel(currentLevel);
-            badgeSprite->setID("tier-badge"_spr);
-            badgeSprite->setZOrder(10);
+			auto badgeSprite = SpriteHelper::getBadgeFromLevel(currentLevel);
+			badgeSprite->setID("tier-badge"_spr);
+			badgeSprite->setZOrder(10);
 
-            auto badgeLabel = CCLabelBMFont::create(std::to_string(currentLevel).c_str(), "bigFont.fnt");
-            badgeLabel->setZOrder(11);
-            badgeLabel->setScale((currentLevel >= 100 ? 0.3 : 0.4));
-            badgeLabel->setPosition({badgeSprite->getContentSize().width / 2, badgeSprite->getContentSize().height / 2 + 1.f});
-            badgeSprite->addChild(badgeLabel);
+			auto badgeLabel = CCLabelBMFont::create(std::to_string(currentLevel).c_str(), "bigFont.fnt");
+			badgeLabel->setZOrder(11);
+			badgeLabel->setScale((currentLevel >= 100 ? 0.3 : 0.4));
+			badgeLabel->setPosition({badgeSprite->getContentSize().width / 2, badgeSprite->getContentSize().height / 2 + 1.f});
+			badgeSprite->addChild(badgeLabel);
 
-            auto badgeShadow = CCSprite::createWithSpriteFrameName("shadow.png"_spr);
-            badgeShadow->setZOrder(-5);
-            badgeShadow->setScale(0.9);
-            badgeShadow->setPosition({badgeSprite->getContentSize().width / 2, badgeSprite->getContentSize().height / 2});
-            badgeShadow->setOpacity(100);
-            badgeSprite->addChild(badgeShadow);
+			auto badgeShadow = CCSprite::createWithSpriteFrameName("shadow.png"_spr);
+			badgeShadow->setZOrder(-5);
+			badgeShadow->setScale(0.9);
+			badgeShadow->setPosition({badgeSprite->getContentSize().width / 2, badgeSprite->getContentSize().height / 2});
+			badgeShadow->setOpacity(100);
+			badgeSprite->addChild(badgeShadow);
 
-            auto badgeGlow = SpriteHelper::getGlowFromLevel(currentLevel);
-            if (badgeGlow != nullptr && currentLevel <= 350) {
-                badgeGlow->setZOrder(-3);
-                badgeGlow->setPosition({badgeSprite->getContentSize().width / 2, badgeSprite->getContentSize().height / 2});
-                badgeGlow->setScaleX(0.975);
-                badgeGlow->setScaleY(0.95);
-                badgeSprite->addChild(badgeGlow);
+			auto badgeGlow = SpriteHelper::getGlowFromLevel(currentLevel);
+			if (badgeGlow != nullptr && currentLevel <= 350) {
+				badgeGlow->setZOrder(-3);
+				badgeGlow->setPosition({badgeSprite->getContentSize().width / 2, badgeSprite->getContentSize().height / 2});
+				badgeGlow->setScaleX(0.975);
+				badgeGlow->setScaleY(0.95);
+				badgeSprite->addChild(badgeGlow);
 
-                ccBlendFunc blending = {GL_ONE, GL_ONE};
-                badgeGlow->setBlendFunc(blending);
+				ccBlendFunc blending = {GL_ONE, GL_ONE};
+				badgeGlow->setBlendFunc(blending);
 
-                if (currentLevel >= 200 && currentLevel <= 224)
-                    badgeGlow->setColor({ 255, 156, 110 });
-                if (currentLevel >= 225 && currentLevel <= 249)
-                    badgeGlow->setColor({ 90, 255, 148 });
-                if (currentLevel >= 250 && currentLevel <= 274)
-                    badgeGlow->setColor({ 65, 239, 255 });
-                if (currentLevel >= 275 && currentLevel <= 299)
-                    badgeGlow->setColor({ 245, 108, 255 });
-                
-                auto fadein = CCEaseSineInOut::create(CCFadeTo::create(0.9f, 50));
-                auto fadeout = CCEaseSineInOut::create(CCFadeTo::create(0.9f, 255));
-                auto sequence = CCSequence::create(fadein, fadeout, nullptr);
-                auto repeatSequence = CCRepeatForever::create(sequence);
+				if (currentLevel >= 200 && currentLevel <= 224)
+					badgeGlow->setColor({ 255, 156, 110 });
+				if (currentLevel >= 225 && currentLevel <= 249)
+					badgeGlow->setColor({ 90, 255, 148 });
+				if (currentLevel >= 250 && currentLevel <= 274)
+					badgeGlow->setColor({ 65, 239, 255 });
+				if (currentLevel >= 275 && currentLevel <= 299)
+					badgeGlow->setColor({ 245, 108, 255 });
+				
+				auto fadein = CCEaseSineInOut::create(CCFadeTo::create(0.9f, 50));
+				auto fadeout = CCEaseSineInOut::create(CCFadeTo::create(0.9f, 255));
+				auto sequence = CCSequence::create(fadein, fadeout, nullptr);
+				auto repeatSequence = CCRepeatForever::create(sequence);
 
-                badgeGlow->runAction(repeatSequence);
-            }
+				badgeGlow->runAction(repeatSequence);
+			}
 
-            return badgeSprite;
-        }
+			return badgeSprite;
+		}
 
-        inline static CCSprite* getBadgeFromLevel(int level) {
-            if (level >= 0 && level <= 4) {
-                return CCSprite::createWithSpriteFrameName("tier0_0.png"_spr);
-            }
-            if (level >= 5 && level <= 9) {
-                return CCSprite::createWithSpriteFrameName("tier0_1.png"_spr);
-            }
-            if (level >= 10 && level <= 14) {
-                return CCSprite::createWithSpriteFrameName("tier0_2.png"_spr);
-            }
-            if (level >= 15 && level <= 19) {
-                return CCSprite::createWithSpriteFrameName("tier0_3.png"_spr);
-            }
-            if (level >= 20 && level <= 24) {
-                return CCSprite::createWithSpriteFrameName("tier0_4.png"_spr);
-            }
+		inline static CCSprite* getBadgeFromLevel(int level) {
+			if (level >= 0 && level <= 4) {
+				return CCSprite::createWithSpriteFrameName("tier0_0.png"_spr);
+			}
+			if (level >= 5 && level <= 9) {
+				return CCSprite::createWithSpriteFrameName("tier0_1.png"_spr);
+			}
+			if (level >= 10 && level <= 14) {
+				return CCSprite::createWithSpriteFrameName("tier0_2.png"_spr);
+			}
+			if (level >= 15 && level <= 19) {
+				return CCSprite::createWithSpriteFrameName("tier0_3.png"_spr);
+			}
+			if (level >= 20 && level <= 24) {
+				return CCSprite::createWithSpriteFrameName("tier0_4.png"_spr);
+			}
 
 			if (level >= 25 && level <= 29) {
 				return CCSprite::createWithSpriteFrameName("tier1_0.png"_spr);

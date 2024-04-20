@@ -47,10 +47,10 @@ bool LevelUpPopup::init(int level, int newLevel) {
 	ccBlendFunc blending = {GL_ONE, GL_ONE};
 	auto winSize = CCDirector::sharedDirector()->getWinSize();
 
-    auto sprite1_main = SpriteHelper::createFullSprite(level);
-    sprite1_main->setPosition(winSize / 2);
-    sprite1_main->setScale(0);
-    m_mainLayer->addChild(sprite1_main);
+	auto sprite1_main = SpriteHelper::createFullSprite(level);
+	sprite1_main->setPosition(winSize / 2);
+	sprite1_main->setScale(0);
+	m_mainLayer->addChild(sprite1_main);
 
 	auto badgeShine1_1 = CCSprite::createWithSpriteFrameName("shineBurst_001.png");
 	badgeShine1_1->setZOrder(-4);
@@ -103,9 +103,9 @@ bool LevelUpPopup::init(int level, int newLevel) {
 
 	//
 
-    auto sprite2_main = SpriteHelper::createFullSprite(newLevel);
-    sprite2_main->setPosition({2000, 2000});
-    sprite2_main->setScale(4.0);
+	auto sprite2_main = SpriteHelper::createFullSprite(newLevel);
+	sprite2_main->setPosition({2000, 2000});
+	sprite2_main->setScale(4.0);
 
 	// 
 
