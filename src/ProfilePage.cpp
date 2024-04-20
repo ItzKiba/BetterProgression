@@ -2,6 +2,7 @@
 #include "LevelHelper.hpp"
 #include "SpriteHelper.hpp"
 #include "Request.hpp"
+#include "Manager.hpp"
 #include <Geode/loader/Loader.hpp>
 #include <string>
 
@@ -302,6 +303,9 @@ class $modify(BP_ProfilePage, ProfilePage) {
         this->m_score->m_creatorPoints * CP_EXP,
         currentEXP,
         perc);
+        if (Manager::getSharedInstance()->isWherwin) {
+            desc = "cant you just play the game and enjoy that? if you guys wanna watch meaningless numbers go up you can play cookie clicker or something. go play runescape. those games are all about shit like this";
+        }
         
         auto alert = FLAlertLayer::create(title.c_str(), desc.c_str(), "OK");
         alert->show();
