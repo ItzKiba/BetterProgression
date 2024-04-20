@@ -10,13 +10,13 @@ using namespace geode::prelude;
 class $modify(BP_MenuLayer, MenuLayer) {
 	bool m_badgeExists = false;
 
-	bool init() {
-		if (!MenuLayer::init()) {
-			return false;
-		}
-		Request::performCPRequest();
-
-		return true;
-	}
+    bool init() {
+        if (!MenuLayer::init()) {
+            return false;
+        }
+        Request::performCPRequest();
+        
+        return true;
+    }
 
 };

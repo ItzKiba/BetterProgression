@@ -24,6 +24,7 @@ add_library(${PROJECT_NAME} SHARED
     src/Manager.hpp
     src/Manager.cpp
     src/GameManager.cpp
+    src/GJScoreCell.cpp
     # Add your cpp files here
 )
 

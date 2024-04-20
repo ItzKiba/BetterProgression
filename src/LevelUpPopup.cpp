@@ -47,10 +47,10 @@ bool LevelUpPopup::init(int level, int newLevel) {
 	ccBlendFunc blending = {GL_ONE, GL_ONE};
 	auto winSize = CCDirector::sharedDirector()->getWinSize();
 
-	auto sprite1_main = createFullSprite(level);
-	sprite1_main->setPosition(winSize / 2);
-	sprite1_main->setScale(0);
-	m_mainLayer->addChild(sprite1_main);
+    auto sprite1_main = SpriteHelper::createFullSprite(level);
+    sprite1_main->setPosition(winSize / 2);
+    sprite1_main->setScale(0);
+    m_mainLayer->addChild(sprite1_main);
 
 	auto badgeShine1_1 = CCSprite::createWithSpriteFrameName("shineBurst_001.png");
 	badgeShine1_1->setZOrder(-4);
@@ -103,9 +103,9 @@ bool LevelUpPopup::init(int level, int newLevel) {
 
 	//
 
-	auto sprite2_main = createFullSprite(newLevel);
-	sprite2_main->setPosition({2000, 2000});
-	sprite2_main->setScale(4.0);
+    auto sprite2_main = SpriteHelper::createFullSprite(newLevel);
+    sprite2_main->setPosition({2000, 2000});
+    sprite2_main->setScale(4.0);
 
 	// 
 
@@ -317,56 +317,6 @@ void LevelUpPopup::onClose(CCObject* sender) {
 
 void LevelUpPopup::registerWithTouchDispatcher() {
 	CCDirector::sharedDirector()->getTouchDispatcher()->addTargetedDelegate(this, -250, true);
-}
-
-CCSprite* LevelUpPopup::createFullSprite(int currentLevel) {
-
-	auto badgeSprite = SpriteHelper::getBadgeFromLevel(currentLevel);
-	badgeSprite->setID("tier-badge"_spr);
-	badgeSprite->setZOrder(10);
-
-	auto badgeLabel = CCLabelBMFont::create(std::to_string(currentLevel).c_str(), "bigFont.fnt");
-	badgeLabel->setZOrder(11);
-	badgeLabel->setScale((currentLevel >= 100 ? 0.3 : 0.4));
-	badgeLabel->setPosition({badgeSprite->getContentSize().width / 2, badgeSprite->getContentSize().height / 2 + 1.f});
-	badgeSprite->addChild(badgeLabel);
-
-	auto badgeShadow = CCSprite::createWithSpriteFrameName("shadow.png"_spr);
-	badgeShadow->setZOrder(-5);
-	badgeShadow->setScale(0.9);
-	badgeShadow->setPosition({badgeSprite->getContentSize().width / 2, badgeSprite->getContentSize().height / 2});
-	badgeShadow->setOpacity(100);
-	badgeSprite->addChild(badgeShadow);
-
-	auto badgeGlow = SpriteHelper::getGlowFromLevel(currentLevel);
-	if (badgeGlow != nullptr && currentLevel <= 350) {
-		badgeGlow->setZOrder(-3);
-		badgeGlow->setPosition({badgeSprite->getContentSize().width / 2, badgeSprite->getContentSize().height / 2});
-		badgeGlow->setScaleX(0.975);
-		badgeGlow->setScaleY(0.95);
-		badgeSprite->addChild(badgeGlow);
-
-		ccBlendFunc blending = {GL_ONE, GL_ONE};
-		badgeGlow->setBlendFunc(blending);
-
-		if (currentLevel >= 200 && currentLevel <= 224)
-			badgeGlow->setColor({ 255, 156, 110 });
-		if (currentLevel >= 225 && currentLevel <= 249)
-			badgeGlow->setColor({ 90, 255, 148 });
-		if (currentLevel >= 250 && currentLevel <= 274)
-			badgeGlow->setColor({ 65, 239, 255 });
-		if (currentLevel >= 275 && currentLevel <= 299)
-			badgeGlow->setColor({ 245, 108, 255 });
-		
-		auto fadein = CCEaseSineInOut::create(CCFadeTo::create(0.9f, 50));
-		auto fadeout = CCEaseSineInOut::create(CCFadeTo::create(0.9f, 255));
-		auto sequence = CCSequence::create(fadein, fadeout, nullptr);
-		auto repeatSequence = CCRepeatForever::create(sequence);
-
-		badgeGlow->runAction(repeatSequence);
-	}
-
-	return badgeSprite;
 }
 
 CCMoveTo* LevelUpPopup::generateShakeAction(CCPoint originalPos, float xyOffset, float duration) {

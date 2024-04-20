@@ -16,10 +16,9 @@ class LevelUpPopup : public FLAlertLayer {
 		bool init(int level, int newLevel);
 		static LevelUpPopup* create(int level, int newLevel); 
 
-		virtual void onClose(CCObject* sender);
-		void keyBackClicked();
-		static CCSprite* createFullSprite(int level);
-		void registerWithTouchDispatcher();
+        virtual void onClose(CCObject* sender);
+        void keyBackClicked();
+        void registerWithTouchDispatcher();
 
 		CCMoveTo* generateShakeAction(CCPoint originalPos, float xyOffset, float duration);
 		void soundCallback1();

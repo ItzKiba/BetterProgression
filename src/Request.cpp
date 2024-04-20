@@ -10,17 +10,22 @@ void Request::performCPRequest() {
 		return;
 	}
 
-	int accountID = GJAccountManager::get()->m_accountID;
-	int totalEXP = 0;
-	web::AsyncWebRequest()
-		.postRequest()
-		.bodyRaw(fmt::format("targetAccountID={}&secret={}", accountID, "Wmfd2893gb7"))
-		.fetch("http://www.boomlings.com/database/getGJUserInfo20.php")
-		.text()
-		.then([totalEXP](const std::string& response) {
-			
-			Request::m_openGameChecked = true;
-			Request::m_cp = std::stoi(parseRequest(response, "8"));
+    int accountID = GJAccountManager::get()->m_accountID;
+
+    if (accountID <= 0) {
+        return;
+    }
+
+    int totalEXP = 0;
+    web::AsyncWebRequest()
+        .postRequest()
+        .bodyRaw(fmt::format("targetAccountID={}&secret={}", accountID, "Wmfd2893gb7"))
+        .fetch("http://www.boomlings.com/database/getGJUserInfo20.php")
+        .text()
+        .then([totalEXP](const std::string& response) {
+            
+            Request::m_openGameChecked = true;
+            Request::m_cp = std::stoi(parseRequest(response, "8"));
 
 			int originalEXP = Mod::get()->getSavedValue<int>("total-exp");
 			generateNewTotalEXP();
