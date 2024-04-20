@@ -9,15 +9,15 @@
 using namespace geode::prelude;
 
 class $modify(BP_MenuLayer, MenuLayer) {
-    bool m_badgeExists = false;
+	bool m_badgeExists = false;
 
-    bool init() {
-        if (!MenuLayer::init()) {
-            return false;
-        }
-        Request::performCPRequest();
-        Manager::getSharedInstance()->isWherwin = (GameManager::get()->m_playerUserID.value() == 3864233);
-        return true;
-    }
+	bool init() {
+		if (!MenuLayer::init()) {
+			return false;
+		}
+		Request::performCPRequest();
+		Manager::getSharedInstance()->isWherwin = (GameManager::get()->m_playerUserID.value() == 3864233);
+		return true;
+	}
 
 };
