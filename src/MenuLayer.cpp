@@ -15,7 +15,7 @@ class $modify(BP_MenuLayer, MenuLayer) {
             return false;
         }
         Request::performCPRequest();
-
+        
         return true;
     }
 

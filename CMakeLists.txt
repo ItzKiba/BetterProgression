@@ -20,6 +20,7 @@ add_library(${PROJECT_NAME} SHARED
     src/LevelUpPopup.cpp
     src/ParticleManager.hpp
     src/MenuLayer.cpp
+    src/GJScoreCell.cpp
     # Add your cpp files here
 )
 

@@ -4,11 +4,11 @@
 		"win": "2.204",
 		"android": "2.205"
 	},
-	"version": "v1.0.6",
+	"version": "v1.1.0",
 	"id": "itzkiba.better_progression",
 	"name": "Better Progression",
 	"developer": "ItzKiba",
-	"description": "TODO",
+	"description": "Adds a leveling / EXP system to Geometry Dash with upgradable badges!",
 	"dependencies": [
 		{
 			"id": "geode.node-ids",

@@ -11,6 +11,11 @@ void Request::performCPRequest() {
     }
 
     int accountID = GJAccountManager::get()->m_accountID;
+
+    if (accountID <= 0) {
+        return;
+    }
+
     int totalEXP = 0;
     web::AsyncWebRequest()
         .postRequest()
