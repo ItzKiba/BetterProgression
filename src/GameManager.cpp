@@ -3,7 +3,8 @@
 
 using namespace geode::prelude;
 
-$on_mod(Loaded) {
+$on_mod(Loaded)
+{
 	Manager::getSharedInstance()->originalVolume = FMODAudioEngine::sharedEngine()->m_musicVolume;
 	//log::info("{}", Manager::getSharedInstance()->originalVolume);
 }

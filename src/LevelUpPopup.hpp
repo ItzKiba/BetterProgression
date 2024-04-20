@@ -9,28 +9,28 @@
 using namespace geode::prelude;
 
 class LevelUpPopup : public FLAlertLayer {
-    public:
-        CCLayer* m_parentLayer;
-        float m_originalVolume;
+	public:
+		CCLayer* m_parentLayer;
+		float m_originalVolume;
 
-        bool init(int level, int newLevel);
-        static LevelUpPopup* create(int level, int newLevel); 
+		bool init(int level, int newLevel);
+		static LevelUpPopup* create(int level, int newLevel); 
 
-        virtual void onClose(CCObject* sender);
-        void keyBackClicked();
-        static CCSprite* createFullSprite(int level);
-        void registerWithTouchDispatcher();
+		virtual void onClose(CCObject* sender);
+		void keyBackClicked();
+		static CCSprite* createFullSprite(int level);
+		void registerWithTouchDispatcher();
 
-        CCMoveTo* generateShakeAction(CCPoint originalPos, float xyOffset, float duration);
-        void soundCallback1();
+		CCMoveTo* generateShakeAction(CCPoint originalPos, float xyOffset, float duration);
+		void soundCallback1();
 
-        void inwardParticlesEnable(CCNode* sender);
+		void inwardParticlesEnable(CCNode* sender);
 
-        void outwardParticlesEnable(CCNode* sender);
+		void outwardParticlesEnable(CCNode* sender);
 
-        void bottomParticlesEnable(CCNode* sender);
+		void bottomParticlesEnable(CCNode* sender);
 
-        void createInnerPopup();
+		void createInnerPopup();
 
-        void enableKeypad();
+		void enableKeypad();
 };

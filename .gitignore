@@ -1,0 +1,4 @@
+# Ignore build folders
+**/build
+# Ignore platform specific build folders
+build-*/

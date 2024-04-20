@@ -12,27 +12,27 @@ using namespace geode::prelude;
 #define CP_EXP 5000
 
 class LevelHelper {
-    public:
-        inline static int calculateTotalEXP(GJUserScore* score) {
-            int totalEXP = 0;
-            totalEXP += (STAR_EXP * score->m_stars);
-            totalEXP += (MOON_EXP * score->m_moons);
-            totalEXP += (DIAMOND_EXP * score->m_diamonds);
-            totalEXP += (GOLD_COIN_EXP * score->m_secretCoins);
-            totalEXP += (USER_COIN_EXP * score->m_userCoins);
-            totalEXP += (DEMON_EXP * score->m_demons);
-            totalEXP += (CP_EXP * score->m_creatorPoints);
+	public:
+		inline static int calculateTotalEXP(GJUserScore* score) {
+			int totalEXP = 0;
+			totalEXP += (STAR_EXP * score->m_stars);
+			totalEXP += (MOON_EXP * score->m_moons);
+			totalEXP += (DIAMOND_EXP * score->m_diamonds);
+			totalEXP += (GOLD_COIN_EXP * score->m_secretCoins);
+			totalEXP += (USER_COIN_EXP * score->m_userCoins);
+			totalEXP += (DEMON_EXP * score->m_demons);
+			totalEXP += (CP_EXP * score->m_creatorPoints);
 
-            return totalEXP;
-        }
+			return totalEXP;
+		}
 
-        inline static int getEXPRequiredForLevel(int level) {
-            return (50 * (level * level) + (50 * level));
-        }
+		inline static int getEXPRequiredForLevel(int level) {
+			return (50 * (level * level) + (50 * level));
+		}
 
-        inline static int getLevelFromEXP(int exp) {
-            return (sqrt(2*exp + 25) - 5) / 10.0;
-        }
+		inline static int getLevelFromEXP(int exp) {
+			return (sqrt(2*exp + 25) - 5) / 10.0;
+		}
 
 
 };
