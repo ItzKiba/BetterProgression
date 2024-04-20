@@ -1,3 +1,6 @@
+# v1.1.1
+* Additional checks for changes in ingame volume.
+
 # v1.1.0
 * Added Tier Badges to leaderboard positions. Note that they may not be 100% accurate since some stats (such as diamonds) are not updated as frequently.
 * Fixed a crash caused by trying to open the game while logged out.
