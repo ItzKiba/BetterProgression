@@ -9,14 +9,16 @@ using namespace geode::prelude;
 
 class $modify(BP_ProfilePage, ProfilePage) {
 
-    CCLayer* m_mainLayer = nullptr;
-    bool m_determinePositions = false;
-    bool m_barAdded = false;
+    struct Fields {
+        CCLayer* m_mainLayer = nullptr;
+        bool m_determinePositions = false;
+        bool m_barAdded = false;
 
-    float m_newStatsPositionY;
-    float m_newStatsPositionX;
-    float m_newPlayerPositionY;
-    float m_newIconBGPositionY;
+        float m_newStatsPositionY;
+        float m_newStatsPositionX;
+        float m_newPlayerPositionY;
+        float m_newIconBGPositionY;
+    };
 
     static void onModify(auto &self) {
         self.setHookPriority("ProfilePage::loadPageFromUserInfo", -1);

@@ -74,7 +74,7 @@ int Request::generateNewTotalEXP() {
     
     auto stats = GameStatsManager::sharedState()->m_playerStats;
 
-    if (stats == nullptr) {
+    if (stats == nullptr || stats->valueForKey("6")->m_sString.empty()) {
         return 0;
     }
 
@@ -109,7 +109,7 @@ int Request::currentTotalEXP() {
 }
 
 void Request::displayTotalEXP() {
-    auto notif = Notification::create(std::to_string(currentTotalEXP()).c_str(), CCSprite::createWithSpriteFrameName("GJ_sMagicIcon_001.png"), 1.5f);
+    auto notif = Notification::create(std::to_string(currentTotalEXP()), CCSprite::createWithSpriteFrameName("GJ_sMagicIcon_001.png"), 1.5f);
     notif->show();
 }
 
