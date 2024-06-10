@@ -17,6 +17,66 @@ void Request::performCPRequest() {
     }
 
     int totalEXP = 0;
+
+    EventListener<web::WebTask> m_listener;
+    m_listener.bind([] (web::WebTask::Event* e) {
+        if (web::WebResponse* res = e->getValue()) {
+            Request::m_openGameChecked = true;
+
+            auto str = res->string().unwrapOr("Failed.");
+            if (str == "Failed.") {
+                return;
+            }
+
+            Request::m_cp = std::stoi(parseRequest(str, "8"));
+
+            int originalEXP = Mod::get()->getSavedValue<int>("total-exp");
+            generateNewTotalEXP();
+
+            if (Mod::get()->getSettingValue<bool>("disable-open-check")) {
+                return;
+            }
+
+            int newEXP = Request::currentTotalEXP();
+            int currentLevel = LevelHelper::getLevelFromEXP(originalEXP);
+            int nextLevel = LevelHelper::getLevelFromEXP(newEXP);
+            int nextLevelEXP = LevelHelper::getEXPRequiredForLevel(nextLevel);
+
+            auto scene = CCDirector::sharedDirector()->getRunningScene();
+
+                Loader::get()->queueInMainThread([scene, originalEXP, newEXP, currentLevel, nextLevelEXP, nextLevel] {
+
+                    CCLayer* parentLayer = nullptr;
+                    CCObject* obj;
+                    CCARRAY_FOREACH(scene->getChildren(), obj) {
+                        auto ccl = typeinfo_cast<CCLayer*>(obj);
+                        if (ccl != nullptr) {
+                            parentLayer = ccl;
+                            break;
+                        }
+                    }
+
+                    if (nextLevel > currentLevel) {
+                        TierBarPopup::createPopupSubroutine(scene, nextLevelEXP, newEXP, 4.5f);
+                        if (parentLayer != nullptr) {
+                            auto popup = LevelUpPopup::create(currentLevel, nextLevel);
+                            popup->m_scene = parentLayer;
+                            popup->show();
+                        }   
+                    } else {
+                        TierBarPopup::createPopupSubroutine(scene, originalEXP, newEXP, 0);
+                    }
+                
+                
+            });
+        }
+    });
+
+    auto req = web::WebRequest();
+    req.bodyString(fmt::format("targetAccountID={}&secret={}", accountID, "Wmfd2893gb7"));
+    m_listener.setFilter(req.post("http://www.boomlings.com/database/getGJUserInfo20.php"));
+
+    /*
     web::AsyncWebRequest()
         .postRequest()
         .bodyRaw(fmt::format("targetAccountID={}&secret={}", accountID, "Wmfd2893gb7"))
@@ -68,13 +128,14 @@ void Request::performCPRequest() {
             });
             
         });
+        */
 }
 
 int Request::generateNewTotalEXP() {
     
     auto stats = GameStatsManager::sharedState()->m_playerStats;
 
-    if (stats == nullptr) {
+    if (stats == nullptr || stats->valueForKey("6")->m_sString.empty()) {
         return 0;
     }
 

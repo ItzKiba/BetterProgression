@@ -2,6 +2,7 @@
 
 #include <Geode/Geode.hpp>
 #include <Geode/utils/web.hpp>
+#include <Geode/loader/Event.hpp>
 #include "LevelHelper.hpp"
 #include "TierBarPopup.hpp"
 #include "LevelUpPopup.hpp"

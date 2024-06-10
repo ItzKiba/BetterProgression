@@ -8,7 +8,10 @@
 using namespace geode::prelude;
 
 class $modify(BP_MenuLayer, MenuLayer) {
-    bool m_badgeExists = false;
+
+    struct Fields {
+        bool m_badgeExists = false;
+    };
 
     bool init() {
         if (!MenuLayer::init()) {
