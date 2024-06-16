@@ -25,6 +25,7 @@ class Request {
         inline static int m_cp = 0;
 
         inline static int m_currentTotalEXP = 0;
+        inline static EventListener<web::WebTask> m_listener;
 
     public:
         static void performCPRequest();
@@ -34,4 +35,5 @@ class Request {
         static void displayTotalEXP();
         static void setCP(int cp);
         inline static bool m_openGameChecked = false;
+        static void setupListener();
 };

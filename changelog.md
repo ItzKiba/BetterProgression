@@ -1,3 +1,8 @@
+# v1.2.0
+
+- Made compatible with Geode v3.0.0-beta.1
+- Fixed a bug that prevented Creator Points from being saved on game startup
+
 # v1.2.0-alpha.1
 
 - Made compatible with Geode v3.0.0-alpha.2

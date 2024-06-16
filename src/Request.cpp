@@ -1,24 +1,6 @@
 #include "Request.hpp"
 
-void Request::setCP(int cp) {
-    Request::m_cp = cp;
-}
-
-void Request::performCPRequest() {
-
-    if (Request::m_openGameChecked) {
-        return;
-    }
-
-    int accountID = GJAccountManager::get()->m_accountID;
-
-    if (accountID <= 0) {
-        return;
-    }
-
-    int totalEXP = 0;
-
-    EventListener<web::WebTask> m_listener;
+void Request::setupListener() {
     m_listener.bind([] (web::WebTask::Event* e) {
         if (web::WebResponse* res = e->getValue()) {
             Request::m_openGameChecked = true;
@@ -29,6 +11,8 @@ void Request::performCPRequest() {
             }
 
             Request::m_cp = std::stoi(parseRequest(str, "8"));
+
+            log::info("Creator Points from request: {}", Request::m_cp);
 
             int originalEXP = Mod::get()->getSavedValue<int>("total-exp");
             generateNewTotalEXP();
@@ -66,11 +50,28 @@ void Request::performCPRequest() {
                     } else {
                         TierBarPopup::createPopupSubroutine(scene, originalEXP, newEXP, 0);
                     }
-                
-                
-            });
-        }
-    });
+                });
+            }
+        });
+}
+
+void Request::setCP(int cp) {
+    Request::m_cp = cp;
+}
+
+void Request::performCPRequest() {
+
+    if (Request::m_openGameChecked) {
+        return;
+    }
+
+    int accountID = GJAccountManager::get()->m_accountID;
+
+    if (accountID <= 0) {
+        return;
+    }
+
+    int totalEXP = 0;
 
     auto req = web::WebRequest();
     req.bodyString(fmt::format("targetAccountID={}&secret={}", accountID, "Wmfd2893gb7"));
