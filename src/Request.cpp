@@ -6,10 +6,13 @@ void Request::setupListener() {
             Request::m_openGameChecked = true;
 
             auto str = res->string().unwrapOr("Failed.");
-            if (str == "Failed.") {
+            if (res->code() != 200) {
                 return;
             }
-
+            if (str == "Failed." || str == "-1") {
+                return;
+            }
+            log::info("Result: {}", str);
             Request::m_cp = std::stoi(parseRequest(str, "8"));
 
             log::info("Creator Points from request: {}", Request::m_cp);
