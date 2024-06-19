@@ -4,11 +4,12 @@ void Request::setupListener() {
     m_listener.bind([] (web::WebTask::Event* e) {
         if (web::WebResponse* res = e->getValue()) {
             Request::m_openGameChecked = true;
-
-            auto str = res->string().unwrapOr("Failed.");
+            
             if (!res->ok()) {
                 return;
             }
+
+            auto str = res->string().unwrapOr("Failed.");
             if (str == "Failed." || str == "-1") {
                 return;
             }
