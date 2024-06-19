@@ -12,7 +12,6 @@ void Request::setupListener() {
             if (str == "Failed." || str == "-1") {
                 return;
             }
-            log::info("Result: {}", str);
             Request::m_cp = std::stoi(parseRequest(str, "8"));
 
             log::info("Creator Points from request: {}", Request::m_cp);
