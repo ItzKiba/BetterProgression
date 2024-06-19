@@ -6,7 +6,7 @@ void Request::setupListener() {
             Request::m_openGameChecked = true;
 
             auto str = res->string().unwrapOr("Failed.");
-            if (res->code() != 200) {
+            if (!res->ok()) {
                 return;
             }
             if (str == "Failed." || str == "-1") {
