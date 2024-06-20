@@ -4,12 +4,15 @@ void Request::setupListener() {
     m_listener.bind([] (web::WebTask::Event* e) {
         if (web::WebResponse* res = e->getValue()) {
             Request::m_openGameChecked = true;
-
-            auto str = res->string().unwrapOr("Failed.");
-            if (str == "Failed.") {
+            
+            if (!res->ok()) {
                 return;
             }
 
+            auto str = res->string().unwrapOr("Failed.");
+            if (str == "Failed." || str == "-1") {
+                return;
+            }
             Request::m_cp = std::stoi(parseRequest(str, "8"));
 
             log::info("Creator Points from request: {}", Request::m_cp);
