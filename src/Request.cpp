@@ -1,4 +1,13 @@
 #include "Request.hpp"
+#include <Geode/modify/GameManager.hpp>
+
+void migrateOldData() {
+    auto saveName = 
+    Mod::get()->setSavedValue<int>(
+        "CCGameManager-total-exp",
+        Mod::get()->getSavedValue<int>("total-exp"));
+    Mod::get()->setSavedValue<int>("total-exp", 0);
+}
 
 void Request::setupListener() {
     m_listener.bind([] (web::WebTask::Event* e) {
@@ -17,7 +26,12 @@ void Request::setupListener() {
 
             log::info("Creator Points from request: {}", Request::m_cp);
 
-            int originalEXP = Mod::get()->getSavedValue<int>("total-exp");
+            if (Mod::get()->getSavedValue<int>("total-exp") != 0) {
+                migrateOldData();
+            }
+
+            auto currentFile = GameManager::sharedState()->m_fileName;
+            int originalEXP = Mod::get()->getSavedValue<int>(GameManager::sharedState()->m_fileName.substr(0, GameManager::sharedState()->m_fileName.find(".dat")) + "-total-exp");
             generateNewTotalEXP();
 
             if (Mod::get()->getSettingValue<bool>("disable-open-check")) {
@@ -152,7 +166,7 @@ int Request::generateNewTotalEXP() {
 
     int totalEXP = currentTotalEXP();
 
-    Mod::get()->setSavedValue<int>("total-exp", totalEXP);
+    Mod::get()->setSavedValue<int>(GameManager::sharedState()->m_fileName.substr(0, GameManager::sharedState()->m_fileName.find(".dat")) + "-total-exp", totalEXP);
 
     return totalEXP;
 }
