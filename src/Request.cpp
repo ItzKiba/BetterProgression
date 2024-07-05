@@ -2,11 +2,14 @@
 #include <Geode/modify/GameManager.hpp>
 
 void migrateOldData() {
+    if (Mod::get()->getSavedValue<int>("total-exp") == 0) {
+        return;
+    }
     auto saveName = 
     Mod::get()->setSavedValue<int>(
         "CCGameManager-total-exp",
         Mod::get()->getSavedValue<int>("total-exp"));
-    Mod::get()->setSavedValue<int>("total-exp", 0);
+    Mod::get()->getSaveContainer().erase("total-exp");
 }
 
 void Request::setupListener() {
@@ -26,7 +29,7 @@ void Request::setupListener() {
 
             log::info("Creator Points from request: {}", Request::m_cp);
 
-            if (Mod::get()->getSavedValue<int>("total-exp") != 0) {
+            if (Mod::get()->hasSavedValue<int>("total-exp")) {
                 migrateOldData();
             }
 
