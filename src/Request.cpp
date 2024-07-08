@@ -29,7 +29,7 @@ void Request::setupListener() {
 
             log::info("Creator Points from request: {}", Request::m_cp);
 
-            if (Mod::get()->hasSavedValue<int>("total-exp")) {
+            if (Mod::get()->hasSavedValue("total-exp")) {
                 migrateOldData();
             }
 
