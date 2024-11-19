@@ -1,3 +1,6 @@
+# v1.3.0
+- Made compatible with GD 2.2074
+
 # v1.2.0
 
 - Made compatible with Geode v3.0.0-beta.1
