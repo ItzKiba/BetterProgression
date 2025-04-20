@@ -1,3 +1,6 @@
+# v1.3.1
+- iOS and Mac support
+
 # v1.3.0
 - Made compatible with GD 2.2074
 
