@@ -3,7 +3,8 @@
   "gd": {
     "win": "2.2081",
     "android": "2.2081",
-    "mac": "2.2081"
+    "mac": "2.2081",
+    "ios": "2.2081"
   },
   "version": "v1.3.2",
   "id": "itzkiba.better_progression",
