@@ -306,9 +306,12 @@ class $modify(BP_ProfilePage, ProfilePage) {
         currentEXP,
         perc);
 
+        // RIP wherwin easter egg. you had a good run, but the geode index rules don't really allow this sort of stuff (anymore). sorry!
+        /*
         if (this->m_accountID == 150529) {
             desc = "cant you just play the game and enjoy that? if you guys wanna watch meaningless numbers go up you can play cookie clicker or something. go play runescape. those games are all about shit like this";
         }
+        */
         
         auto alert = FLAlertLayer::create(title.c_str(), desc.c_str(), "OK");
         alert->show();
