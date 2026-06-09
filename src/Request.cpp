@@ -108,9 +108,8 @@ void Request::performCPRequest() {
             int nextLevel = LevelHelper::getLevelFromEXP(newEXP);
             int nextLevelEXP = LevelHelper::getEXPRequiredForLevel(nextLevel);
 
-            auto scene = CCDirector::sharedDirector()->getRunningScene();
-
-                Loader::get()->queueInMainThread([scene, originalEXP, newEXP, currentLevel, nextLevelEXP, nextLevel] {
+                Loader::get()->queueInMainThread([originalEXP, newEXP, currentLevel, nextLevelEXP, nextLevel] {
+                    auto scene = CCDirector::sharedDirector()->getRunningScene();
 
                     CCLayer* parentLayer = nullptr;
                     CCObject* obj;
