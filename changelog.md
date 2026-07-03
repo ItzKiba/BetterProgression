@@ -1,3 +1,6 @@
+# v1.3.3
+- Removed my pet frog named Stoi. He was very cute :(
+
 # v1.3.2
 - Made compatible with GD 2.2081
 

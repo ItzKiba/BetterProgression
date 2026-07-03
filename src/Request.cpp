@@ -92,7 +92,7 @@ void Request::performCPRequest() {
             if (str == "Failed." || str == "-1") {
                 return;
             }
-            Request::m_cp = std::stoi(parseRequest(str, "8"));
+            Request::m_cp = geode::utils::numFromString<int>(parseRequest(str, "8")).unwrapOr(0);
 
             log::info("Creator Points from request: {}", Request::m_cp);
 
