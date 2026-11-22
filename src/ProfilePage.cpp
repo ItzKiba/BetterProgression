@@ -22,30 +22,14 @@ class $modify(BP_ProfilePage, ProfilePage) {
         float m_newIconBGBorderPositionY;
     };
     
-    // static void onModify(auto &self) {
-    //     self.setHookPriority("ProfilePage::loadPageFromUserInfo", -1);
-    // }
-
-    void searchForLayer() {
-        if (this->m_fields->m_mainLayer != nullptr) {
-            return;
-        }
-        CCObject* obj;
-        for (CCNode* node : this->getChildrenExt()) {
-            auto ccl = typeinfo_cast<CCLayer*>(node);
-            if (ccl != nullptr) {
-                this->m_fields->m_mainLayer = ccl;
-                break;
-            }
-        }
-
-        return;
+    static void onModify(auto &self) {
+        self.setHookPriority("ProfilePage::loadPageFromUserInfo", -1);
     }
 
     void loadPageFromUserInfo(GJUserScore* p0) {
         ProfilePage::loadPageFromUserInfo(p0);
 
-        searchForLayer();
+        this->m_fields->m_mainLayer = m_mainLayer;
 
         auto gm = GameManager::get();
         if (p0->m_userID == gm->m_playerUserID) {
@@ -55,6 +39,7 @@ class $modify(BP_ProfilePage, ProfilePage) {
        
         auto playerMenu = this->m_fields->m_mainLayer->getChildByID("player-menu");
         auto iconBackground = this->m_fields->m_mainLayer->getChildByID("icon-background");
+        float ibgw = iconBackground->getContentWidth();
         auto iconBackgroundBorder = this->m_fields->m_mainLayer->getChildByID("icon-background-border");
         auto statsMenu = this->m_fields->m_mainLayer->getChildByID("stats-menu");
 
@@ -65,7 +50,7 @@ class $modify(BP_ProfilePage, ProfilePage) {
         if (Loader::get()->isModLoaded("bitz.customprofiles")) {
             iconBackground = this->m_fields->m_mainLayer->getChildByID("bitz.customprofiles/ccscale-icons");
             if (iconBackground) {
-                iconBackground->setContentSize({350.f, 54.f});
+                iconBackground->setContentSize({ibgw, 54.f});
                 iconBackground->setScale(0.98);
             }
             
