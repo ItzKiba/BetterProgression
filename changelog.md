@@ -1,3 +1,9 @@
+# v1.3.6
+- Fixed crash when using CustomProfiles
+
+# v1.3.5
+- Made compatible with GD 2.2091
+
 # v1.3.3
 - Removed my pet frog named Stoi. He was very cute :(
 
