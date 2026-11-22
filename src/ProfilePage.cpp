@@ -14,15 +14,17 @@ class $modify(BP_ProfilePage, ProfilePage) {
         bool m_determinePositions = false;
         bool m_barAdded = false;
 
+        // @ kiba from 2 years ago why did you do this whats the goal here
         float m_newStatsPositionY;
         float m_newStatsPositionX;
         float m_newPlayerPositionY;
         float m_newIconBGPositionY;
+        float m_newIconBGBorderPositionY;
     };
     
-    static void onModify(auto &self) {
-        self.setHookPriority("ProfilePage::loadPageFromUserInfo", -1);
-    }
+    // static void onModify(auto &self) {
+    //     self.setHookPriority("ProfilePage::loadPageFromUserInfo", -1);
+    // }
 
     void searchForLayer() {
         if (this->m_fields->m_mainLayer != nullptr) {
@@ -53,6 +55,7 @@ class $modify(BP_ProfilePage, ProfilePage) {
        
         auto playerMenu = this->m_fields->m_mainLayer->getChildByID("player-menu");
         auto iconBackground = this->m_fields->m_mainLayer->getChildByID("icon-background");
+        auto iconBackgroundBorder = this->m_fields->m_mainLayer->getChildByID("icon-background-border");
         auto statsMenu = this->m_fields->m_mainLayer->getChildByID("stats-menu");
 
         if (playerMenu == nullptr || iconBackground == nullptr || statsMenu == nullptr) {
@@ -61,20 +64,23 @@ class $modify(BP_ProfilePage, ProfilePage) {
         
         if (Loader::get()->isModLoaded("bitz.customprofiles")) {
             iconBackground = this->m_fields->m_mainLayer->getChildByID("bitz.customprofiles/ccscale-icons");
-
-            iconBackground->setContentSize({350.f, 54.f});
-            iconBackground->setScale(0.98);
-
-            auto commentBackgroundColor = this->m_fields->m_mainLayer->getChildByID("bitz.customprofiles/ccscale-comments");
-            commentBackgroundColor->setScale(0.98);
-            commentBackgroundColor->setContentWidth(350.f);
-            commentBackgroundColor->setContentHeight(108.f);
+            if (iconBackground) {
+                iconBackground->setContentSize({350.f, 54.f});
+                iconBackground->setScale(0.98);
+            }
             
+            auto commentBackgroundColor = this->m_fields->m_mainLayer->getChildByID("bitz.customprofiles/ccscale-comments");
+            if (commentBackgroundColor) {
+                commentBackgroundColor->setScale(0.98);
+                commentBackgroundColor->setContentWidth(350.f);
+                commentBackgroundColor->setContentHeight(108.f);
+            }
         }
 
         if (!this->m_fields->m_determinePositions) {
             this->m_fields->m_newPlayerPositionY = playerMenu->getPositionY() - 12.f;
             this->m_fields->m_newIconBGPositionY = iconBackground->getPositionY() - 12.f;
+            this->m_fields->m_newIconBGBorderPositionY = iconBackgroundBorder->getPositionY() - 12.f;
             this->m_fields->m_newStatsPositionY = statsMenu->getPositionY() + 3.f; //shh
             this->m_fields->m_newStatsPositionX = statsMenu->getPositionX() + 25.f;
             
@@ -82,14 +88,9 @@ class $modify(BP_ProfilePage, ProfilePage) {
 
         playerMenu->setPositionY(this->m_fields->m_newPlayerPositionY);
         iconBackground->setPositionY(this->m_fields->m_newIconBGPositionY);
+        iconBackgroundBorder->setPositionY(this->m_fields->m_newIconBGBorderPositionY);
         statsMenu->setPositionY(this->m_fields->m_newStatsPositionY);
         statsMenu->setPositionX(this->m_fields->m_newStatsPositionX);
-
-
-        // auto leftMenu = this->m_fields->m_mainLayer->getChildByID("left-menu");
-        // if (leftMenu != nullptr) {
-        //     leftMenu->setPositionY(this->m_fields->m_newIconBGPositionY - 27.f);
-        // }
 
         this->m_fields->m_determinePositions = true;
 

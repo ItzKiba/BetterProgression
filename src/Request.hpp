@@ -35,5 +35,4 @@ class Request {
         static void displayTotalEXP();
         static void setCP(int cp);
         inline static bool m_openGameChecked = false;
-        static void setupListener();
 };
