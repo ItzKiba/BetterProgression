@@ -1,9 +1,10 @@
 {
-  "geode": "6.0.0-beta.1",
+  "geode": "6.0.0-beta.2",
   "gd": {
     "win": "2.2091",
     "android": "2.2091",
-    "mac": "2.2091"
+    "mac": "2.2091",
+    "ios": "2.2091"
   },
   "version": "v1.3.6",
   "id": "itzkiba.better_progression",
