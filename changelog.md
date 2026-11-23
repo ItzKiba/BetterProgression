@@ -1,3 +1,6 @@
+# v1.3.7
+- iOS
+
 # v1.3.6
 - Fixed crash when using CustomProfiles
 
